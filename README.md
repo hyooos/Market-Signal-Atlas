@@ -295,47 +295,45 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 
 ## Repository Structure
 
-GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와 큰 단위 폴더만 남겼습니다. Next.js 실행과 배포에 필요한 필수 파일은 `web/` 안에 두고, 이동 가능한 설정 파일은 `web/config/`에 모았습니다.
+Next.js 앱을 루트에서 바로 실행할 수 있도록 두고, 이동 가능한 설정과 데이터·문서는 기능별 폴더에 모았습니다.
 
 ```bash
 .
 ├── README.md                   # 프로젝트 소개와 실행 안내
-├── docs/                       # 심사/시연 문서와 제작 기록
-│   ├── DEMO_GUIDE.md           # 3분 체험 경로
-│   ├── images/                 # README·데모용 이미지
-│   ├── presentation/           # 발표 자료
-│   ├── project-notes/          # 구현 로그, 리디자인 메모, UI/UX 피드백
-│   └── ui-audit/               # 화면 검수 이미지
+├── package.json                # 앱 실행 스크립트, 의존성, PostCSS 설정
+├── package-lock.json
+├── next.config.ts              # Next.js 설정
+├── tsconfig.json               # TypeScript와 alias 설정
+├── vercel.json                 # Vercel Cron 설정
+├── .vercelignore               # 배포 제외 규칙
+├── .gitignore                  # 로컬 캐시, 빌드 결과, 작업 로그 제외
 │
-├── web/                        # 실제 Next.js 애플리케이션
-│   ├── package.json            # 앱 실행 스크립트, 의존성, PostCSS 설정
-│   ├── package-lock.json
-│   ├── next.config.ts
-│   ├── tsconfig.json
-│   ├── vercel.json
-│   ├── .vercelignore
-│   │
-│   ├── config/                 # 환경 예시와 테스트·린트 설정
-│   │   ├── env.example
-│   │   ├── eslint.config.mjs
-│   │   └── vitest.config.ts
-│   │
-│   ├── src/                    # 앱 코드
-│   │   ├── app/                # Next.js 페이지와 API 라우트
-│   │   ├── components/         # 대시보드 UI 컴포넌트
-│   │   └── lib/                # 데이터 로딩, 지표 계산, 오케스트레이션
-│   │
-│   ├── data/                   # 앱에서 사용하는 데이터
-│   │   ├── raw/                # Trump·Musk 원본 CSV
-│   │   ├── source/             # 검토 사건·뉴스 스냅샷·요약 JSON
-│   │   └── generated/          # 앱이 읽는 배포용 JSON
-│   │
-│   └── scripts/                # 데이터셋 빌드와 AI 배치 스크립트
+├── config/                     # 환경 예시와 테스트·린트 설정
+│   ├── env.example
+│   ├── eslint.config.mjs
+│   └── vitest.config.ts
 │
-└── .gitignore                  # 로컬 캐시, 빌드 결과, 작업 로그 제외
+├── src/                        # 앱 코드
+│   ├── app/                    # Next.js 페이지와 API 라우트
+│   ├── components/             # 대시보드 UI 컴포넌트
+│   └── lib/                    # 데이터 로딩, 지표 계산, 오케스트레이션
+│
+├── data/                       # 앱에서 사용하는 데이터
+│   ├── raw/                    # Trump·Musk 원본 CSV
+│   ├── source/                 # 검토 사건·뉴스 스냅샷·요약 JSON
+│   └── generated/              # 앱이 읽는 배포용 JSON
+│
+├── scripts/                    # 데이터셋 빌드와 AI 배치 스크립트
+│
+└── docs/                       # 심사/시연 문서와 제작 기록
+    ├── DEMO_GUIDE.md           # 3분 체험 경로
+    ├── images/                 # README·데모용 이미지
+    ├── presentation/           # 발표 자료
+    ├── project-notes/          # 구현 로그, 리디자인 메모, UI/UX 피드백
+    └── ui-audit/               # 화면 검수 이미지
 ```
 
-실행과 배포 기준 폴더는 `web/`입니다. 로컬 실행, 테스트, 빌드는 모두 `cd web` 이후 진행합니다.
+실행과 배포 기준 폴더는 레포지토리 루트입니다. 로컬 실행, 테스트, 빌드는 루트에서 바로 진행합니다.
 
 ---
 
@@ -371,7 +369,6 @@ GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와
 ## Local Development
 
 ```bash
-cd web
 npm install
 npm run dev
 ```
@@ -384,7 +381,6 @@ npm run dev
 검증:
 
 ```bash
-cd web
 npm run lint
 npm test
 npm run build
@@ -394,7 +390,7 @@ npm run build
 
 ## Environment Variables
 
-`web/config/env.example`을 `web/.env.local`로 복사하고 필요한 값만 설정합니다.
+`config/env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
 
 ```env
 TWELVE_DATA_API_KEY=

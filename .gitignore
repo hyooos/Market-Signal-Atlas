@@ -6,11 +6,11 @@ coverage/
 
 # local environment and platform state
 .env*
-!web/config/env.example
+!config/env.example
 .vercel/
 
 # generated Next.js types
-web/next-env.d.ts
+next-env.d.ts
 
 # generated caches
 data/generated/*.tmp

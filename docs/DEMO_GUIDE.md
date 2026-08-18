@@ -200,10 +200,10 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 ## 기술 구조
 
 ```text
-web/data/raw 원본 CSV / web/data/source 검토 입력 JSON
+data/raw 원본 CSV / data/source 검토 입력 JSON
   → 전처리·중복 제거·주제 군집화
   → Yahoo 일봉 가격·거래량 근거 생성
-  → web/data/generated 배포용 JSON
+  → data/generated 배포용 JSON
   → Next.js App Router
   → 선택 사건별 뉴스·공개 소셜 조회
   → Vercel 배포 환경 + 일일 Cron
@@ -229,7 +229,6 @@ web/data/raw 원본 CSV / web/data/source 검토 입력 JSON
 ## 로컬 실행과 검증
 
 ```bash
-cd web
 npm install
 npm run dev
 ```
@@ -240,7 +239,6 @@ npm run dev
 전체 검증:
 
 ```bash
-cd web
 npm run lint
 npm test
 npm run build
@@ -250,7 +248,7 @@ npm run build
 
 ## 환경 변수
 
-`web/config/env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
+`config/env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
 
 ```env
 TWELVE_DATA_API_KEY=
@@ -270,14 +268,14 @@ ENABLE_LIVE_AI=false
 | --- | --- |
 | `components/signal-atlas-dashboard.tsx` | 시장 타임라인, 사건 탐색, 멀티 자산 비교, 근거 검토 UI |
 | `components/signal-universe.tsx` | 32,393개 전체 원문 검색 UI |
-| `web/data/raw/` | Trump·Musk 원본 CSV |
-| `web/data/source/` | 수작업 검토 사건, 뉴스 스냅샷, 한국어 요약 JSON |
-| `web/data/generated/` | 앱이 실제로 읽는 배포용 JSON |
+| `data/raw/` | Trump·Musk 원본 CSV |
+| `data/source/` | 수작업 검토 사건, 뉴스 스냅샷, 한국어 요약 JSON |
+| `data/generated/` | 앱이 실제로 읽는 배포용 JSON |
 | `lib/gdelt.ts` | 뉴스·공개 소셜 검색과 대체 데이터 |
 | `lib/orchestration.ts` | 결정론적 근거 검토와 선택형 OpenAI 보조 |
-| `web/scripts/build-events.mjs` | 검토 사건과 실제 가격창 생성 |
-| `web/scripts/build-signal-catalog.mjs` | 전체 원문 카탈로그 생성 |
-| `web/scripts/build-evidence-universe.mjs` | 군집 대표와 근거 준비 레이어 생성 |
+| `scripts/build-events.mjs` | 검토 사건과 실제 가격창 생성 |
+| `scripts/build-signal-catalog.mjs` | 전체 원문 카탈로그 생성 |
+| `scripts/build-evidence-universe.mjs` | 군집 대표와 근거 준비 레이어 생성 |
 | `docs/project-notes/BUILD_LOG.md` | Codex 활용 과정과 주요 구현 결정 |
 
 ## 현재 한계
