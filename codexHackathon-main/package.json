@@ -1,0 +1,40 @@
+{
+  "name": "market-mover",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint app components lib scripts next.config.ts vitest.config.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "data:build": "node scripts/build-events.mjs && node scripts/build-signal-catalog.mjs && node scripts/build-evidence-universe.mjs",
+    "catalog:build": "node scripts/build-signal-catalog.mjs",
+    "evidence:build": "node scripts/build-evidence-universe.mjs",
+    "ai:batch:prepare": "node scripts/prepare-ai-batch.mjs",
+    "ai:batch:submit": "node scripts/submit-ai-batch.mjs",
+    "ai:batch:sync": "node scripts/sync-ai-batch.mjs",
+    "ai:batch:import": "node scripts/import-ai-batch.mjs"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.2.5",
+    "lucide-react": "^0.468.0",
+    "next": "16.3.1",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "recharts": "3.10.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "csv-parse": "^6.1.0",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "16.3.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.4"
+  }
+}
