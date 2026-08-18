@@ -24,3 +24,6 @@ chat_history/
 Thumbs.db
 
 .vercel
+
+# Codex local instructions
+AGENTS.md
