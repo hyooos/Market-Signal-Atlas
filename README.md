@@ -1,14 +1,16 @@
 # 📈 Market Signal Atlas
 
-### 시장·뉴스·공개 소셜 반응을 함께 보는 공개 시그널 인텔리전스 대시보드
+### Public Signal Intelligence Dashboard for Market, News, and Social Reactions
 
 > 공개 발언·뉴스·공시·청문회가 등장한 시점에 시장 가격, 뉴스량, 공개 소셜 관심도가 어떻게 함께 관찰됐는지 탐색하는 이벤트 인텔리전스 대시보드
 
 ---
 
-## 개요
+## 개요 / Overview
 
 본 프로젝트는 OpenAI 해커톤에서 제작한 이벤트 기반 시장 시그널 탐색 서비스입니다. 공개 발언이나 뉴스가 나온 시점에 특정 자산의 가격, 거래량, 뉴스 보도량, 공개 소셜 관심도가 어떤 형태로 함께 움직였는지 한 화면에서 확인할 수 있도록 설계했습니다.
+
+Market Signal Atlas is an event-based market signal exploration dashboard built for the OpenAI hackathon. It helps users inspect how asset prices, trading volume, news coverage, and public social attention were observed around public statements, news, filings, and hearings.
 
 단순히 “누가 말해서 가격이 올랐다”는 결론을 제시하는 데서 끝나지 않고,
 
@@ -27,7 +29,7 @@
 
 ---
 
-## 데모
+## 데모 / Demo
 
 - 배포 화면: https://market-mover.vercel.app/
 - 한국어 화면: https://market-mover.vercel.app/ko
@@ -37,7 +39,7 @@
 
 ---
 
-## 3분 체험 경로
+## 3분 체험 경로 / 3-Minute Review Path
 
 심사위원이나 처음 보는 사용자는 아래 순서로 핵심 기능을 빠르게 확인할 수 있습니다.
 
