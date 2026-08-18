@@ -291,18 +291,22 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 
 ---
 
-## 프로젝트 구조
+## 레포지토리 구성
+
+GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와 큰 단위 폴더만 남겼습니다. Next.js 실행과 배포에 필요한 설정 파일은 모두 `web/` 안에 모았습니다.
 
 ```bash
 .
-├── README.md
-├── docs/                       # 심사/시연 가이드와 프로젝트 노트
-│   ├── DEMO_GUIDE.md
-│   ├── project-notes/
-│   └── ui-audit/
+├── README.md                   # 프로젝트 소개와 실행 안내
+├── docs/                       # 심사/시연 문서와 제작 기록
+│   ├── DEMO_GUIDE.md           # 3분 체험 경로
+│   ├── images/                 # README·데모용 이미지
+│   ├── presentation/           # 발표 자료
+│   ├── project-notes/          # 구현 로그, 리디자인 메모, UI/UX 피드백
+│   └── ui-audit/               # 화면 검수 이미지
 │
-├── web/                        # Next.js 앱 전체
-│   ├── package.json
+├── web/                        # 실제 Next.js 애플리케이션
+│   ├── package.json            # 앱 실행 스크립트와 의존성
 │   ├── package-lock.json
 │   ├── next.config.ts
 │   ├── tsconfig.json
@@ -312,19 +316,26 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 │   ├── next-env.d.ts
 │   ├── .env.example
 │   ├── .vercelignore
+│   │
 │   ├── config/                 # 테스트 설정
-│   ├── src/                    # 페이지, API 라우트, UI, 로직
-│   │   ├── app/
-│   │   ├── components/
-│   │   └── lib/
-│   ├── data/                   # 원본, 검토 입력, 배포용 JSON
-│   │   ├── raw/
-│   │   ├── source/
-│   │   └── generated/
+│   │   └── vitest.config.ts
+│   │
+│   ├── src/                    # 앱 코드
+│   │   ├── app/                # Next.js 페이지와 API 라우트
+│   │   ├── components/         # 대시보드 UI 컴포넌트
+│   │   └── lib/                # 데이터 로딩, 지표 계산, 오케스트레이션
+│   │
+│   ├── data/                   # 앱에서 사용하는 데이터
+│   │   ├── raw/                # Trump·Musk 원본 CSV
+│   │   ├── source/             # 검토 사건·뉴스 스냅샷·요약 JSON
+│   │   └── generated/          # 앱이 읽는 배포용 JSON
+│   │
 │   └── scripts/                # 데이터셋 빌드와 AI 배치 스크립트
 │
-└── .gitignore
+└── .gitignore                  # 로컬 캐시, 빌드 결과, 작업 로그 제외
 ```
+
+실행과 배포 기준 폴더는 `web/`입니다. 로컬 실행, 테스트, 빌드는 모두 `cd web` 이후 진행합니다.
 
 ---
 
