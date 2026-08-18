@@ -1,92 +1,92 @@
-# Market Mover build log
+# Market Signal Atlas 빌드 로그
 
-## Product decisions
+## 제품 방향 결정
 
-- Reduced the initial five-person concept to three distinct influence types: policy (Trump), founder (Musk), and industry narrative (Altman).
-- Removed the proposed Impact Score. The demo exposes abnormal return, relative volume, and three-day persistence directly.
-- Kept live free ingestion narrow: current Trump RSS plus five daily market prices. Live Musk and Altman tracking is presented as a paid X connector roadmap.
-- Positioned the product around faster monitoring and research rather than investment recommendations.
+- 초기의 5인물 비교 아이디어를 정책형 Trump, 창업자형 Musk, 산업 내러티브형 Altman이라는 세 가지 영향 유형으로 줄였습니다.
+- 제안 단계에 있던 단일 `Impact Score`는 제거했습니다. 데모에서는 1일 초과수익률, 상대 거래량, 3일 지속성을 직접 보여줍니다.
+- 무료 라이브 수집 범위는 현재 Trump RSS와 5개 일봉 시장 가격으로 좁게 유지했습니다. Musk와 Altman의 실시간 X 추적은 유료 커넥터 기반 로드맵으로 분리했습니다.
+- 제품 포지션은 투자 추천이 아니라 더 빠른 모니터링과 리서치 지원으로 정리했습니다.
 
-## Data decisions
+## 데이터 결정
 
-- Preserved 28 human-reviewed cases as an explainable showcase layer while moving the full eligible source corpus into a separate searchable catalog.
-- Preserved the original public-statement URL for every evidence record.
-- Used TSLA as Musk's direct linked asset and NVDA/MSFT as visibly labeled Altman AI proxies.
-- Aligned after-hours and non-trading-day statements to the next available market session.
-- Generated deployable JSON artifacts while excluding the raw CSVs from Git.
+- 사람이 검토한 28개 사례는 설명 가능한 쇼케이스 레이어로 유지하고, 조건을 통과한 전체 원문 코퍼스는 별도의 검색 가능한 카탈로그로 이동했습니다.
+- 모든 근거 레코드에 원래 공개 발언 URL을 보존했습니다.
+- Musk의 직접 연결 자산은 TSLA로, Altman 관련 AI 프록시는 NVDA와 MSFT로 명확히 표시했습니다.
+- 장후 발언과 비거래일 발언은 다음 사용 가능한 시장 거래 세션에 정렬했습니다.
+- 배포 가능한 JSON 산출물을 생성하되, 원본 대용량 CSV는 Git에서 제외하는 방향으로 설계했습니다.
 
-## Reliability decisions
+## 신뢰성 결정
 
-- Kept external API keys on the server in Route Handlers.
-- Added an authenticated daily cron endpoint.
-- Bundled a build-time snapshot so provider failure, missing credentials, or quota exhaustion cannot break the demo.
-- Reported fallback data as stale in the UI.
-- Added unit checks for calculations, event counts, unique IDs, source URLs, and proxy labels.
+- 외부 API 키는 Next.js Route Handler의 서버 영역에만 두었습니다.
+- 인증된 일일 cron 엔드포인트를 추가했습니다.
+- provider 장애, 자격 증명 누락, 할당량 초과가 있어도 데모가 깨지지 않도록 빌드 시점 스냅샷을 함께 포함했습니다.
+- fallback 데이터는 UI에서 stale 상태로 표시했습니다.
+- 계산식, 이벤트 수, 고유 ID, 출처 URL, 프록시 라벨을 확인하는 단위 테스트를 추가했습니다.
 
-## Codex contribution
+## Codex 활용 내용
 
-Codex was used to inspect the source datasets, define the product boundary, implement the Next.js application and data pipeline, connect public/server-side data sources, add verification, and document deployment and methodological limitations. Human judgment remains explicit in event selection, topic mapping, and linked-asset rationale.
+Codex는 원본 데이터셋 점검, 제품 범위 정의, Next.js 애플리케이션 및 데이터 파이프라인 구현, 공개/서버측 데이터 소스 연결, 검증 추가, 배포 및 방법론적 한계 문서화를 지원했습니다. 사건 선정, 주제 매핑, 연결 자산 판단에는 사람의 검토와 판단을 명시적으로 남겼습니다.
 
-## Signal Atlas pivot
+## Signal Atlas 전환
 
-- Reframed the product from personality-led “Market Mover” rankings to policy, executive, and industry signal exploration.
-- Replaced the normalized comparison chart with each linked asset's real D-5 through D+5 closing prices and an explicit signal-session marker.
-- Retained abnormal return, volume, and persistence as transparent context rather than restoring an opaque impact score.
-- Added signal-type comparison and public engagement as an attention evidence layer.
-- Added a dedicated `/ko` interface and reviewed Korean summaries while preserving every English original and source URL.
+- 인물 중심의 `Market Mover` 순위형 제품에서 정책, 경영진, 산업 시그널 탐색형 제품으로 방향을 바꿨습니다.
+- 정규화 비교 차트를 각 연결 자산의 실제 D-5부터 D+5 종가와 명시적인 시그널 세션 마커로 교체했습니다.
+- 불투명한 impact score를 되살리지 않고, 초과수익률, 거래량, 지속성을 투명한 맥락 지표로 유지했습니다.
+- 시그널 유형 비교와 공개 관심도 레이어를 추가했습니다.
+- `/ko` 전용 한국어 인터페이스를 추가하고 한국어 요약을 검토하되, 모든 영어 원문과 출처 URL은 보존했습니다.
 
-## Cross-domain reaction and orchestration pivot
+## 교차 도메인 반응 및 오케스트레이션 전환
 
-- Split signal source (`Social`, `News`, `Filing`, `Hearing`) from thematic category (`Policy`, `Executive`, `Industry`).
-- Added four reviewed cross-source signals with original OpenAI, NVIDIA, SEC EDGAR, and U.S. Senate links.
-- Added Market, News, Public Attention, and combined reaction lenses. Price remains the actual D-5 through D+5 close; GDELT values remain raw article counts.
-- Stored GDELT `TimelineVolRaw` snapshots with the exact query and left unavailable histories empty instead of estimating them.
-- Scoped social mention and hashtag counts to the tracked Musk/Trump corpora and exposed that limitation in the UI.
-- Implemented a six-stage research desk: classifier, ontology mapper, amplification analyst, deterministic market analyst, confidence auditor, and bilingual report writer.
-- Added `POST /api/research`. It uses reviewed reports by default and can run live OpenAI orchestration only when explicitly enabled with server-side environment variables.
+- 시그널 출처(`Social`, `News`, `Filing`, `Hearing`)와 주제 범주(`Policy`, `Executive`, `Industry`)를 분리했습니다.
+- OpenAI, NVIDIA, SEC EDGAR, 미국 상원 원문 링크를 포함한 검토 완료 교차 출처 시그널 4개를 추가했습니다.
+- `Market`, `News`, `Public Attention`, 통합 반응 렌즈를 추가했습니다. 가격은 실제 D-5부터 D+5 종가를 유지하고, GDELT 값은 원시 기사 수로 유지했습니다.
+- GDELT `TimelineVolRaw` 스냅샷은 정확한 검색 쿼리와 함께 저장했으며, 사용할 수 없는 이력은 추정하지 않고 비워두었습니다.
+- 소셜 언급과 해시태그 수는 추적 중인 Musk/Trump 코퍼스 범위로 제한하고, 그 한계를 UI에 노출했습니다.
+- 분류기, 온톨로지 매퍼, 확산 분석가, 결정론적 시장 분석가, 신뢰도 감사자, 이중언어 리포트 작성자로 구성된 6단계 리서치 데스크를 구현했습니다.
+- `POST /api/research`를 추가했습니다. 기본값은 검토 완료 리포트를 사용하며, 서버측 환경 변수로 명시적으로 활성화했을 때만 live OpenAI 오케스트레이션을 실행할 수 있습니다.
 
-## Full-corpus orchestration redesign
+## 전체 코퍼스 오케스트레이션 재설계
 
-- Ingested all 145,442 rows from the two complete local source files and retained every eligible original since 2023: 23,357 Trump posts and 9,036 Musk posts.
-- Removed the former per-person and total-event ceilings from the ingestion layer. The 28 reviewed records now remain only as evidence-rich demonstrations.
-- Added deterministic eligibility, preliminary topic mapping, exact-duplicate detection, and time/topic seed clustering for all 32,393 candidates.
-- Added a server-paginated `GET /api/signals` catalog so the full generated dataset stays on the server rather than entering the client bundle.
-- Added an OpenAI Batch JSONL preparation/import workflow. No AI-complete label appears until an actual result has been imported.
-- Added key-gated Batch upload, creation, status, and result-download scripts; they are implemented but intentionally not executed without billing credentials.
-- Routed deeper amplification, market, audit, and report work conditionally at the cluster level; missing news or platform-wide social coverage remains explicitly unavailable.
-- Added a bilingual Signal Universe UI with corpus counts, orchestration stages, search, filters, pagination, and the Sam Altman corpus limitation.
+- 두 개의 완전한 로컬 원본 파일에서 145,442행을 모두 수집하고, 2023년 이후 조건을 통과한 원문을 모두 보존했습니다. Trump 게시물 23,357개와 Musk 게시물 9,036개가 포함됩니다.
+- 인물별/전체 이벤트 수 제한을 수집 계층에서 제거했습니다. 기존 28개 검토 레코드는 근거가 풍부한 데모 사례로만 유지했습니다.
+- 32,393개 후보 전체에 대해 결정론적 eligibility, 1차 주제 매핑, 정확 중복 탐지, 시간/주제 기반 seed clustering을 추가했습니다.
+- 전체 생성 데이터셋이 클라이언트 번들에 들어가지 않도록 서버 페이지네이션 방식의 `GET /api/signals` 카탈로그를 추가했습니다.
+- OpenAI Batch JSONL 준비/가져오기 워크플로를 추가했습니다. 실제 결과를 import하기 전까지는 AI 완료 라벨이 표시되지 않도록 했습니다.
+- Batch 업로드, 생성, 상태 확인, 결과 다운로드 스크립트를 키 기반으로 제한했습니다. 구현은 완료했지만 과금 자격 증명 없이 실행하지 않도록 의도적으로 남겨두었습니다.
+- 클러스터 수준에서 더 깊은 확산, 시장, 감사, 리포트 작업이 조건부로 라우팅되도록 했습니다. 뉴스나 플랫폼 전체 소셜 커버리지가 없는 경우에는 명시적으로 unavailable 상태를 유지했습니다.
+- 코퍼스 수, 오케스트레이션 단계, 검색, 필터, 페이지네이션, Sam Altman 코퍼스 한계를 보여주는 이중언어 Signal Universe UI를 추가했습니다.
 
-## API-free evidence orchestration
+## API 없는 근거 오케스트레이션
 
-- Replaced the public live-model path with six deterministic roles that run from observed source, mapping, attention, and market fields.
-- Added one representative per cluster and an evidence-ready layer, preserving all 32,393 originals for search while preventing repeated deep analysis.
-- Added committed build-time evidence for BTC-USD and SOXX alongside SPY, QQQ, TSLA, NVDA, and MSFT.
-- Added actual D-5 through D+5 closes, abnormal return, volume multiple, volatility multiple, persistence, tracked-corpus mentions, and linked-media references to the priority layer.
-- Renamed the visible workflow to Evidence Research and positioned it as AI-ready conditional orchestration rather than completed AI analysis.
-- Added an explicit latest-signal `Pending` state so an RSS arrival is never shown as a confirmed market reaction.
-- Removed the temporary 200-signal cap. The current build produces 735 eligible social signals plus seven news, one filing, and one hearing signal; future builds grow automatically with valid data.
+- 공개 live-model 경로를 관측된 출처, 매핑, 관심도, 시장 필드에서 실행되는 6개의 결정론적 역할로 교체했습니다.
+- 클러스터별 대표 1개와 evidence-ready 레이어를 추가했습니다. 32,393개 원문은 모두 검색 가능하게 보존하면서 반복적인 심층 분석은 방지했습니다.
+- SPY, QQQ, TSLA, NVDA, MSFT에 더해 BTC-USD와 SOXX의 빌드 시점 근거도 커밋했습니다.
+- priority 레이어에 실제 D-5부터 D+5 종가, 초과수익률, 거래량 배수, 변동성 배수, 지속성, 추적 코퍼스 언급량, 연결 미디어 참조를 추가했습니다.
+- 화면에 보이는 워크플로 이름을 `Evidence Research`로 바꾸고, 완료된 AI 분석이 아니라 AI-ready 조건부 오케스트레이션으로 포지셔닝했습니다.
+- 최신 시그널에 명시적인 `Pending` 상태를 추가해 RSS 도착만으로 확정된 시장 반응처럼 보이지 않게 했습니다.
+- 임시 200개 시그널 제한을 제거했습니다. 현재 빌드는 조건을 통과한 소셜 시그널 735개, 뉴스 7개, 공시 1개, 청문회 1개를 생성하며, 이후 빌드는 유효 데이터에 따라 자동으로 확장됩니다.
 
-## Evidence collection and asset-context correction
+## 근거 수집 및 자산 맥락 수정
 
-- Added on-demand Google News RSS search with GDELT DOC as a secondary provider and the reviewed snapshot as the final fallback. Counts and headlines now come from returned articles rather than UI-only labels.
-- Added unauthenticated Bluesky public-search sampling for related posts and hashtag occurrences, with the tracked local corpus as an explicitly labeled fallback. This is a public sample, not an X-wide mention count.
-- Added `SPY`, `QQQ`, and `BTC-USD` to every signal as common market context while keeping directly related and proxy assets distinct.
-- Added per-asset actual-close windows and an asset switcher. The UI prints the original Eastern publication time and market phase, but does not claim an exact intraday price from daily data.
-- Fixed the Atlas composer so reviewed filing and hearing signals are no longer discarded by a news-only filter.
-- Removed the access-request CTA and replaced decorative AI styling with a quieter evidence-research visual system.
-- Added an optional server-only OpenAI Responses API path for bilingual report editing. Deterministic calculations remain the source of truth and are used whenever the feature is disabled, missing a key, or fails.
+- Google News RSS 검색을 온디맨드로 추가하고, GDELT DOC를 보조 provider로, 검토 스냅샷을 최종 fallback으로 사용했습니다. 기사 수와 헤드라인은 UI용 임의 라벨이 아니라 반환된 기사에서 가져오도록 수정했습니다.
+- 인증 없는 Bluesky 공개 검색 표본을 추가해 관련 게시물과 해시태그 출현을 확인했습니다. 추적 로컬 코퍼스는 명시적으로 fallback으로 표시했습니다. 이는 공개 표본이지 X 전체 언급량이 아닙니다.
+- 모든 시그널에 공통 시장 맥락으로 `SPY`, `QQQ`, `BTC-USD`를 추가하되, 직접 관련 자산과 프록시 자산은 분리했습니다.
+- 자산별 실제 종가 창과 자산 선택기를 추가했습니다. UI는 원 게시 시각(ET)과 시장 단계를 표시하지만, 일봉 데이터로 정확한 장중 가격을 주장하지 않습니다.
+- Atlas composer에서 뉴스 전용 필터 때문에 검토 완료 공시와 청문회 시그널이 버려지던 문제를 수정했습니다.
+- 접근 요청 CTA를 제거하고, 장식적인 AI 스타일 대신 차분한 evidence-research 시각 체계로 교체했습니다.
+- 이중언어 리포트 편집을 위한 선택형 서버 전용 OpenAI Responses API 경로를 추가했습니다. 결정론적 계산이 계속 기준값이며, 기능이 비활성화되었거나 키가 없거나 실패하면 항상 결정론적 결과를 사용합니다.
 
-## Market-first discovery pass
+## 시장 우선 탐색 패스
 
-- Added an actual-close market timeline reconstructed from the committed signal price windows, with clickable Direct, Policy, and Proxy markers that open the corresponding evidence record.
-- Added a prior-close-indexed multi-asset comparison for every event while preserving the single-asset actual-close view and exact publication-time/session annotation.
-- Added topic, mapping, and exact-time filters plus transparent sorting by 1D excess reaction, volume multiple, 3D persistence, or recency.
-- Moved the full Signal Universe below the core market timeline and event explorer so the first workflow answers the product question before exposing the data pipeline.
-- Kept BTC-USD explicitly labeled as equity-session-sampled context rather than claiming a complete 24/7 intraday series.
+- 커밋된 시그널 가격 창에서 재구성한 실제 종가 기반 시장 타임라인을 추가했습니다. 클릭 가능한 `Direct`, `Policy`, `Proxy` 마커를 누르면 해당 근거 레코드가 열립니다.
+- 모든 이벤트에 대해 직전 종가 기준 인덱스화된 멀티 자산 비교를 추가했습니다. 동시에 단일 자산 실제 종가 보기와 정확한 게시 시각/세션 주석도 유지했습니다.
+- 주제, 매핑, exact-time 필터와 1일 초과반응, 거래량 배수, 3일 지속성, 최신순 기반의 투명한 정렬을 추가했습니다.
+- 전체 Signal Universe를 핵심 시장 타임라인과 이벤트 탐색기 아래로 이동해, 데이터 파이프라인을 보여주기 전에 제품의 핵심 질문에 먼저 답하도록 구성했습니다.
+- BTC-USD는 완전한 24/7 장중 시계열이라고 주장하지 않고, 주식 거래 세션에 표본화된 맥락으로 명확히 표시했습니다.
 
-## First-visit UI hierarchy pass
+## 첫 방문 UI 위계 정리
 
-- Synchronized the initially selected event and every filtered/sorted fallback with the visible evidence panel, while preserving an explicit user selection when it remains in scope.
-- Promoted the working market timeline to the first navigation item, renamed the former summary-card comparison section to Insights, and rewrote the hero around the market-first task.
-- Made the indexed multi-asset reaction the default event chart, increased the chart height, and collapsed the deterministic six-stage process behind a concise Evidence Review summary.
-- Removed the duplicate desktop sidebar, strengthened selected-event labeling, localized the pending Trump state, and added single-column mobile ordering, touch targets, overflow protection, and readable core text sizes.
+- 초기에 선택된 이벤트와 필터/정렬 fallback이 보이는 근거 패널과 동기화되도록 수정했습니다. 단, 사용자가 명시적으로 선택한 이벤트가 현재 범위에 남아 있으면 그 선택은 유지했습니다.
+- 실제로 작동하는 시장 타임라인을 첫 번째 내비게이션 항목으로 올리고, 기존 요약 카드 비교 섹션을 `Insights`로 이름 바꾸었으며, hero 문구를 시장 우선 작업 흐름 중심으로 다시 작성했습니다.
+- 인덱스화된 멀티 자산 반응을 기본 이벤트 차트로 설정하고, 차트 높이를 키웠으며, 결정론적 6단계 과정을 간결한 `Evidence Review` 요약 뒤로 접었습니다.
+- 중복된 데스크톱 사이드바를 제거하고, 선택 이벤트 라벨을 강화했으며, pending Trump 상태를 한국어로 현지화했습니다. 모바일에서는 단일 열 순서, 터치 타깃, overflow 보호, 읽기 쉬운 본문 크기를 추가했습니다.

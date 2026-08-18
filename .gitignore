@@ -1,0 +1,26 @@
+# dependencies and builds
+node_modules/
+.next/
+out/
+coverage/
+
+# local environment and platform state
+.env*
+!.env.example
+.vercel/
+
+# generated caches
+data/generated/*.tmp
+data/batch/
+
+# local/private conversation exports
+codex-chat_history/
+chat_history/
+*_chat_history/
+*chat*logs*.json
+
+# operating system
+.DS_Store
+Thumbs.db
+
+.vercel
