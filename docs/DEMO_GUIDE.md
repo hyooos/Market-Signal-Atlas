@@ -250,7 +250,7 @@ npm run build
 
 ## 환경 변수
 
-`.env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
+`web/config/env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
 
 ```env
 TWELVE_DATA_API_KEY=

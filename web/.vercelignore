@@ -3,7 +3,7 @@ node_modules/
 coverage/
 .git/
 .env*
-!.env.example
+!config/env.example
 .vercel/
 data/raw/
 docs/project-notes/

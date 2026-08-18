@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src scripts next.config.ts config/vitest.config.ts",
+    "lint": "eslint --config config/eslint.config.mjs src scripts next.config.ts config/vitest.config.ts",
     "test": "vitest run --config config/vitest.config.ts",
     "test:watch": "vitest --config config/vitest.config.ts",
     "data:build": "node scripts/build-events.mjs && node scripts/build-signal-catalog.mjs && node scripts/build-evidence-universe.mjs",
@@ -36,5 +36,10 @@
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.0",
     "vitest": "^3.2.4"
+  },
+  "postcss": {
+    "plugins": {
+      "@tailwindcss/postcss": {}
+    }
   }
 }

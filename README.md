@@ -295,7 +295,7 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 
 ## 레포지토리 구성
 
-GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와 큰 단위 폴더만 남겼습니다. Next.js 실행과 배포에 필요한 설정 파일은 모두 `web/` 안에 모았습니다.
+GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와 큰 단위 폴더만 남겼습니다. Next.js 실행과 배포에 필요한 필수 파일은 `web/` 안에 두고, 이동 가능한 설정 파일은 `web/config/`에 모았습니다.
 
 ```bash
 .
@@ -308,18 +308,16 @@ GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와
 │   └── ui-audit/               # 화면 검수 이미지
 │
 ├── web/                        # 실제 Next.js 애플리케이션
-│   ├── package.json            # 앱 실행 스크립트와 의존성
+│   ├── package.json            # 앱 실행 스크립트, 의존성, PostCSS 설정
 │   ├── package-lock.json
 │   ├── next.config.ts
 │   ├── tsconfig.json
-│   ├── postcss.config.mjs
-│   ├── eslint.config.mjs
 │   ├── vercel.json
-│   ├── next-env.d.ts
-│   ├── .env.example
 │   ├── .vercelignore
 │   │
-│   ├── config/                 # 테스트 설정
+│   ├── config/                 # 환경 예시와 테스트·린트 설정
+│   │   ├── env.example
+│   │   ├── eslint.config.mjs
 │   │   └── vitest.config.ts
 │   │
 │   ├── src/                    # 앱 코드
@@ -396,7 +394,7 @@ npm run build
 
 ## 환경 변수
 
-`web/.env.example`을 `web/.env.local`로 복사하고 필요한 값만 설정합니다.
+`web/config/env.example`을 `web/.env.local`로 복사하고 필요한 값만 설정합니다.
 
 ```env
 TWELVE_DATA_API_KEY=
