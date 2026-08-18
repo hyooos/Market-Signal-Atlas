@@ -295,35 +295,39 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 
 ## Repository Structure
 
-Next.js 앱을 루트에서 바로 실행할 수 있도록 두고, 이동 가능한 설정과 데이터·문서는 기능별 폴더에 모았습니다.
+Next.js 앱은 레포지토리 루트에서 바로 실행됩니다. 루트에는 실행에 필요한 최소 설정 파일만 두고, 코드·데이터·문서·보조 설정은 역할별 폴더로 정리했습니다.
 
 ```bash
 .
 ├── README.md                   # 프로젝트 소개와 실행 안내
-├── package.json                # 앱 실행 스크립트, 의존성, PostCSS 설정
-├── package-lock.json
+├── package.json                # 실행 스크립트, 의존성, PostCSS 설정
+├── package-lock.json           # npm 의존성 잠금 파일
 ├── next.config.ts              # Next.js 설정
-├── tsconfig.json               # TypeScript와 alias 설정
+├── tsconfig.json               # TypeScript와 @ alias 설정
 ├── vercel.json                 # Vercel Cron 설정
-├── .vercelignore               # 배포 제외 규칙
+├── .vercelignore               # Vercel 배포 제외 규칙
 ├── .gitignore                  # 로컬 캐시, 빌드 결과, 작업 로그 제외
 │
-├── config/                     # 환경 예시와 테스트·린트 설정
-│   ├── env.example
-│   ├── eslint.config.mjs
-│   └── vitest.config.ts
+├── config/                     # 루트에 없어도 되는 보조 설정
+│   ├── env.example             # 환경 변수 예시
+│   ├── eslint.config.mjs       # ESLint 설정
+│   └── vitest.config.ts        # Vitest 설정
 │
-├── src/                        # 앱 코드
-│   ├── app/                    # Next.js 페이지와 API 라우트
+├── src/                        # 애플리케이션 소스 코드
+│   ├── app/                    # Next.js App Router
+│   │   ├── api/                # live, news, research, signals, cron API
+│   │   ├── ko/                 # 한국어 페이지 라우트
+│   │   ├── layout.tsx
+│   │   └── page.tsx
 │   ├── components/             # 대시보드 UI 컴포넌트
-│   └── lib/                    # 데이터 로딩, 지표 계산, 오케스트레이션
+│   └── lib/                    # 데이터 로딩, 지표 계산, 근거 오케스트레이션
 │
-├── data/                       # 앱에서 사용하는 데이터
+├── data/                       # 앱에서 읽는 데이터셋
 │   ├── raw/                    # Trump·Musk 원본 CSV
-│   ├── source/                 # 검토 사건·뉴스 스냅샷·요약 JSON
-│   └── generated/              # 앱이 읽는 배포용 JSON
+│   ├── source/                 # 검토 사건, 뉴스 스냅샷, 한국어 요약 JSON
+│   └── generated/              # 화면/API가 읽는 배포용 JSON
 │
-├── scripts/                    # 데이터셋 빌드와 AI 배치 스크립트
+├── scripts/                    # 데이터셋 빌드와 AI 배치 유틸리티
 │
 └── docs/                       # 심사/시연 문서와 제작 기록
     ├── DEMO_GUIDE.md           # 3분 체험 경로
@@ -333,7 +337,7 @@ Next.js 앱을 루트에서 바로 실행할 수 있도록 두고, 이동 가능
     └── ui-audit/               # 화면 검수 이미지
 ```
 
-실행과 배포 기준 폴더는 레포지토리 루트입니다. 로컬 실행, 테스트, 빌드는 루트에서 바로 진행합니다.
+로컬 실행, 테스트, 빌드는 모두 레포지토리 루트에서 바로 진행합니다.
 
 ---
 
