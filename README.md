@@ -296,40 +296,33 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 ```bash
 .
 ├── README.md
-├── package.json
-├── .env.example
-
-├── app/                         # Next.js 페이지와 API 라우트
-│   ├── api/                     # 라이브, 시그널, 뉴스, 리서치, cron API
-│   ├── ko/                      # 한국어 페이지 라우트
-│   ├── layout.tsx
-│   └── page.tsx
-
-├── components/                  # 대시보드 UI 컴포넌트
-│   ├── signal-atlas-dashboard.tsx
-│   └── signal-universe.tsx
-
-├── data/
-│   ├── raw/                     # Trump·Musk 원본 CSV
-│   ├── source/                  # 검토 사건·뉴스 스냅샷·요약 JSON
-│   └── generated/               # 앱이 읽는 배포용 JSON
-
-├── lib/                         # 데이터 로딩, 지표 계산, 오케스트레이션
-│   ├── metrics.ts
-│   ├── orchestration.ts
-│   ├── gdelt.ts
-│   └── *.test.ts
-
-├── scripts/                     # 데이터셋 빌드와 AI 배치 스크립트
-│   ├── build-events.mjs
-│   ├── build-signal-catalog.mjs
-│   └── build-evidence-universe.mjs
-
-├── docs/
-│   ├── DEMO_GUIDE.md            # 심사위원용 3분 체험 경로
-│   ├── project-notes/           # 구현 로그, 리디자인 메모, UI/UX 피드백
-│   └── ui-audit/                # 화면 검수 이미지
-
+├── docs/                       # 심사/시연 가이드와 프로젝트 노트
+│   ├── DEMO_GUIDE.md
+│   ├── project-notes/
+│   └── ui-audit/
+│
+├── web/                        # Next.js 앱 전체
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── next.config.ts
+│   ├── tsconfig.json
+│   ├── postcss.config.mjs
+│   ├── eslint.config.mjs
+│   ├── vercel.json
+│   ├── next-env.d.ts
+│   ├── .env.example
+│   ├── .vercelignore
+│   ├── config/                 # 테스트 설정
+│   ├── src/                    # 페이지, API 라우트, UI, 로직
+│   │   ├── app/
+│   │   ├── components/
+│   │   └── lib/
+│   ├── data/                   # 원본, 검토 입력, 배포용 JSON
+│   │   ├── raw/
+│   │   ├── source/
+│   │   └── generated/
+│   └── scripts/                # 데이터셋 빌드와 AI 배치 스크립트
+│
 └── .gitignore
 ```
 
@@ -367,6 +360,7 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 ## 로컬 실행
 
 ```bash
+cd web
 npm install
 npm run dev
 ```
@@ -379,6 +373,7 @@ npm run dev
 검증:
 
 ```bash
+cd web
 npm run lint
 npm test
 npm run build
@@ -388,7 +383,7 @@ npm run build
 
 ## 환경 변수
 
-`.env.example`을 `.env.local`로 복사하고 필요한 값만 설정합니다.
+`web/.env.example`을 `web/.env.local`로 복사하고 필요한 값만 설정합니다.
 
 ```env
 TWELVE_DATA_API_KEY=
