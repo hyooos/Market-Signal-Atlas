@@ -4,6 +4,8 @@ import { parse } from "csv-parse/sync";
 import { XMLParser } from "fast-xml-parser";
 
 const root = process.cwd();
+const rawDir = path.join(root, "data", "raw");
+const sourceDir = path.join(root, "data", "source");
 const outputDir = path.join(root, "data", "generated");
 fs.mkdirSync(outputDir, { recursive: true });
 const MARKET_CONTEXT_ASSETS = ["SPY", "QQQ", "BTC-USD"];
@@ -50,7 +52,7 @@ function classifyTrump(text) {
 }
 
 function loadMusk() {
-  const file = path.join(root, "all_musk_posts.csv");
+  const file = path.join(rawDir, "all_musk_posts.csv");
   if (!fs.existsSync(file)) return [];
   const rows = parse(fs.readFileSync(file), { columns: true, skip_empty_lines: true, relax_quotes: true });
   const records = rows
@@ -87,7 +89,7 @@ function loadMusk() {
 }
 
 function loadTrump() {
-  const file = path.join(root, "Kaggle_Trump_2009_2025.csv");
+  const file = path.join(rawDir, "Kaggle_Trump_2009_2025.csv");
   if (!fs.existsSync(file)) return [];
   const rows = parse(fs.readFileSync(file), { columns: true, skip_empty_lines: true, relax_quotes: true });
   const records = rows
@@ -124,7 +126,7 @@ function loadTrump() {
 }
 
 function loadAltman() {
-  const file = path.join(root, "data", "sam-events.source.json");
+  const file = path.join(sourceDir, "sam-events.source.json");
   return JSON.parse(fs.readFileSync(file, "utf8")).map((row) => ({
     ...row,
     person: "altman",
@@ -137,11 +139,11 @@ function loadAltman() {
 }
 
 function loadKoreanSummaries() {
-  return JSON.parse(fs.readFileSync(path.join(root, "data", "event-summaries.ko.json"), "utf8"));
+  return JSON.parse(fs.readFileSync(path.join(sourceDir, "event-summaries.ko.json"), "utf8"));
 }
 
 function loadCrossSourceEvents() {
-  return JSON.parse(fs.readFileSync(path.join(root, "data", "cross-source-events.source.json"), "utf8")).map((row) => ({
+  return JSON.parse(fs.readFileSync(path.join(sourceDir, "cross-source-events.source.json"), "utf8")).map((row) => ({
     ...row,
     likes: null,
     reposts: null,
@@ -151,17 +153,17 @@ function loadCrossSourceEvents() {
 }
 
 function loadNewsSnapshots() {
-  return JSON.parse(fs.readFileSync(path.join(root, "data", "news-volume-snapshots.source.json"), "utf8"));
+  return JSON.parse(fs.readFileSync(path.join(sourceDir, "news-volume-snapshots.source.json"), "utf8"));
 }
 
 function loadTrackedPosts() {
   const posts = [];
-  const muskFile = path.join(root, "all_musk_posts.csv");
+  const muskFile = path.join(rawDir, "all_musk_posts.csv");
   if (fs.existsSync(muskFile)) {
     const rows = parse(fs.readFileSync(muskFile), { columns: true, skip_empty_lines: true, relax_quotes: true });
     posts.push(...rows.map((row) => ({ date: String(row.createdAt).slice(0, 10), text: cleanText(row.fullText) })));
   }
-  const trumpFile = path.join(root, "Kaggle_Trump_2009_2025.csv");
+  const trumpFile = path.join(rawDir, "Kaggle_Trump_2009_2025.csv");
   if (fs.existsSync(trumpFile)) {
     const rows = parse(fs.readFileSync(trumpFile), { columns: true, skip_empty_lines: true, relax_quotes: true });
     posts.push(...rows.map((row) => ({ date: String(row.date).slice(0, 10), text: cleanText(row.text) })));

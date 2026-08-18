@@ -200,10 +200,10 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 ## 기술 구조
 
 ```text
-로컬 공개 데이터셋 / 검토된 공식 원문
+data/raw 원본 CSV / data/source 검토 입력 JSON
   → 전처리·중복 제거·주제 군집화
   → Yahoo 일봉 가격·거래량 근거 생성
-  → 작은 배포용 JSON
+  → data/generated 배포용 JSON
   → Next.js App Router
   → 선택 사건별 뉴스·공개 소셜 조회
   → Vercel 배포 환경 + 일일 Cron
@@ -268,6 +268,9 @@ ENABLE_LIVE_AI=false
 | --- | --- |
 | `components/signal-atlas-dashboard.tsx` | 시장 타임라인, 사건 탐색, 멀티 자산 비교, 근거 검토 UI |
 | `components/signal-universe.tsx` | 32,393개 전체 원문 검색 UI |
+| `data/raw/` | Trump·Musk 원본 CSV |
+| `data/source/` | 수작업 검토 사건, 뉴스 스냅샷, 한국어 요약 JSON |
+| `data/generated/` | 앱이 실제로 읽는 배포용 JSON |
 | `lib/gdelt.ts` | 뉴스·공개 소셜 검색과 대체 데이터 |
 | `lib/orchestration.ts` | 결정론적 근거 검토와 선택형 OpenAI 보조 |
 | `scripts/build-events.mjs` | 검토 사건과 실제 가격창 생성 |

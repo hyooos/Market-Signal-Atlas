@@ -309,9 +309,10 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 │   ├── signal-atlas-dashboard.tsx
 │   └── signal-universe.tsx
 
-├── data/                        # 원본 스냅샷과 생성 JSON
-│   ├── generated/
-│   └── *.source.json
+├── data/
+│   ├── raw/                     # Trump·Musk 원본 CSV
+│   ├── source/                  # 검토 사건·뉴스 스냅샷·요약 JSON
+│   └── generated/               # 앱이 읽는 배포용 JSON
 
 ├── lib/                         # 데이터 로딩, 지표 계산, 오케스트레이션
 │   ├── metrics.ts

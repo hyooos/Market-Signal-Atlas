@@ -4,8 +4,10 @@ import path from "node:path";
 import { parse } from "csv-parse/sync";
 
 const root = process.cwd();
+const rawDir = path.join(root, "data", "raw");
+const sourceDir = path.join(root, "data", "source");
 const outputFile = path.join(root, "data", "generated", "signal-catalog.json");
-const aiFile = path.join(root, "data", "ai-classifications.source.json");
+const aiFile = path.join(sourceDir, "ai-classifications.source.json");
 const reviewedFile = path.join(root, "data", "generated", "events.json");
 
 const cleanText = (value = "") => String(value)
@@ -55,7 +57,7 @@ function weekBucket(value) {
 }
 
 function loadCsv(file) {
-  return parse(fs.readFileSync(path.join(root, file)), {
+  return parse(fs.readFileSync(path.join(rawDir, file)), {
     columns: true,
     skip_empty_lines: true,
     relax_quotes: true,
@@ -107,9 +109,10 @@ function loadTrump(rows) {
 }
 
 function main() {
-  for (const file of ["all_musk_posts.csv", "Kaggle_Trump_2009_2025.csv", "data/generated/events.json"]) {
-    if (!fs.existsSync(path.join(root, file))) throw new Error(`Missing required source: ${file}`);
+  for (const file of ["all_musk_posts.csv", "Kaggle_Trump_2009_2025.csv"]) {
+    if (!fs.existsSync(path.join(rawDir, file))) throw new Error(`Missing required source: data/raw/${file}`);
   }
+  if (!fs.existsSync(reviewedFile)) throw new Error("Missing required source: data/generated/events.json");
 
   const reviewedEvents = JSON.parse(fs.readFileSync(reviewedFile, "utf8"));
   const reviewedIds = new Set(reviewedEvents.map((event) => event.id));

@@ -80,14 +80,14 @@
     
     Trump:
     
-    - Kaggle Trump_2009_2025.csv
+    - data/raw/Kaggle_Trump_2009_2025.csv
     - X와 Truth Social 통합 데이터
     - engagement는 데이터 품질을 고려해 기본적으로 likes 중심 사용
     
     Musk:
     
-    - all_musk_posts.csvx`
-    - musk_quote_tweets.csv
+    - data/raw/all_musk_posts.csv
+    - data/raw/musk_quote_tweets.csv
     - 원본, 리트윗, 답글, 인용 포함
     - 2023년 이후 viewCount 결측이 크게 줄어들어 Track1 기간에 활용 가능
     
@@ -580,15 +580,15 @@
     
     https://www.kaggle.com/datasets/dadalyndell/elon-musk-tweets-2010-to-2025-march
     
-    [musk_quote_tweets.csv](musk_quote_tweets.csv)
+    [musk_quote_tweets.csv](../../data/raw/musk_quote_tweets.csv)
     
-    [all_musk_posts.csv](all_musk_posts.csv)
+    [all_musk_posts.csv](../../data/raw/all_musk_posts.csv)
     
 - 트럼프
     
     https://www.kaggle.com/datasets/datadrivendecision/trump-tweets-2009-2025/data
     
-    [Kaggle Trump_2009_2025.csv](Kaggle_Trump_2009_2025.csv)
+    [Kaggle Trump_2009_2025.csv](../../data/raw/Kaggle_Trump_2009_2025.csv)
     
 - 샘 올트먼
     
