@@ -6,7 +6,7 @@
 
 ---
 
-## 개요 / Overview
+## Overview
 
 본 프로젝트는 OpenAI 해커톤에서 제작한 이벤트 기반 시장 시그널 탐색 서비스입니다. 공개 발언이나 뉴스가 나온 시점에 특정 자산의 가격, 거래량, 뉴스 보도량, 공개 소셜 관심도가 어떤 형태로 함께 움직였는지 한 화면에서 확인할 수 있도록 설계했습니다.
 
@@ -29,7 +29,7 @@ Market Signal Atlas is an event-based market signal exploration dashboard built 
 
 ---
 
-## 데모 / Demo
+## Demo
 
 - 배포 화면: https://market-mover.vercel.app/
 - 한국어 화면: https://market-mover.vercel.app/ko
@@ -39,7 +39,7 @@ Market Signal Atlas is an event-based market signal exploration dashboard built 
 
 ---
 
-## 3분 체험 경로 / 3-Minute Review Path
+## 3-Minute Review Path
 
 심사위원이나 처음 보는 사용자는 아래 순서로 핵심 기능을 빠르게 확인할 수 있습니다.
 
@@ -94,7 +94,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 핵심 기능
+## Key Features
 
 - 시장 타임라인에서 가격 움직임과 같은 세션의 공개 시그널 역탐색
 - 사건별 연결 자산, SPY, QQQ, BTC-USD 동시 반응 비교
@@ -108,7 +108,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 기술 스택
+## Tech Stack
 
 ### 프레임워크와 언어
 
@@ -145,7 +145,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 분석 구조
+## Analysis Framework
 
 ### 1️⃣ 공개 시그널 수집
 
@@ -187,7 +187,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 핵심 지표
+## Key Metrics
 
 ### 1일 초과수익률
 
@@ -209,7 +209,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 시간 정렬 원칙
+## Time Alignment Principles
 
 - 정확한 게시 시각은 미국 동부시간(ET)으로 표시합니다.
 - 장 마감 후, 주말, 휴일 발언은 다음 미국 거래 세션에 정렬합니다.
@@ -219,7 +219,7 @@ Elon Musk · TSLA · 2024-10-25
 
 ---
 
-## 작업 흐름
+## Workflow
 
 ```mermaid
 flowchart LR
@@ -243,7 +243,7 @@ G --> H["한국어·영문 리포트"]
 
 ---
 
-## 주요 발견
+## Key Findings
 
 * 가격 움직임만으로 원인을 단정하기보다, 같은 거래 세션의 공개 시그널을 함께 놓고 검토하는 방식이 더 투명함
 * Direct, Policy, Proxy 연결을 분리하면 “직접 연결된 기업”과 “시장 전체 맥락”을 구분할 수 있음
@@ -253,7 +253,7 @@ G --> H["한국어·영문 리포트"]
 
 ---
 
-## 데이터 범위
+## Data Scope
 
 ```text
 원본 데이터 145,442행
@@ -277,7 +277,7 @@ G --> H["한국어·영문 리포트"]
 
 ---
 
-## 데이터와 AI의 분리
+## Data and AI Separation
 
 기본 배포 환경은 결정론적 근거 검토를 사용합니다.
 
@@ -293,7 +293,7 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
 
 ---
 
-## 레포지토리 구성
+## Repository Structure
 
 GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와 큰 단위 폴더만 남겼습니다. Next.js 실행과 배포에 필요한 필수 파일은 `web/` 안에 두고, 이동 가능한 설정 파일은 `web/config/`에 모았습니다.
 
@@ -339,7 +339,7 @@ GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와
 
 ---
 
-## API 라우트
+## API Routes
 
 | 경로 | 역할 |
 | --- | --- |
@@ -351,7 +351,7 @@ GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와
 
 ---
 
-## 검토 체크리스트
+## Review Checklist
 
 - [x] 실제 공개 원문과 출처 URL
 - [x] 실제 시장 종가·거래량
@@ -368,7 +368,7 @@ GitHub 첫 화면이 산만해 보이지 않도록 루트에는 소개 문서와
 
 ---
 
-## 로컬 실행
+## Local Development
 
 ```bash
 cd web
@@ -392,7 +392,7 @@ npm run build
 
 ---
 
-## 환경 변수
+## Environment Variables
 
 `web/config/env.example`을 `web/.env.local`로 복사하고 필요한 값만 설정합니다.
 
@@ -410,7 +410,7 @@ ENABLE_LIVE_AI=false
 
 ---
 
-## 현재 한계
+## Current Limitations
 
 - 발언과 시장 반응의 시간적 연관성은 인과관계 증명이 아님
 - 무료 데모에는 X 전체 아카이브나 실시간 전체 스트림이 없음
@@ -422,7 +422,7 @@ ENABLE_LIVE_AI=false
 
 ---
 
-## 결론
+## Conclusion
 
 Market Signal Atlas는 공개 정보와 시장 반응을 하나의 증거 경로로 연결하는 대시보드입니다.
 
@@ -432,6 +432,6 @@ Market Signal Atlas는 공개 정보와 시장 반응을 하나의 증거 경로
 
 ---
 
-## 면책 문구
+## Disclaimer
 
 Market Signal Atlas는 연구와 모니터링을 위한 도구입니다. 투자 조언, 매수·매도 추천, 가격 예측 서비스가 아닙니다.
