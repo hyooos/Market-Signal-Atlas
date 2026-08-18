@@ -2,13 +2,13 @@
 
 > 공개 발언·뉴스·공시·청문회가 등장한 시점에 시장, 미디어, 대중 관심에서 어떤 반응이 함께 관찰됐는지 탐색하는 이벤트 인텔리전스 서비스
 
-[![Production](https://img.shields.io/badge/Production-Vercel-111111)](https://market-mover.vercel.app/)
-[![Korean UI](https://img.shields.io/badge/UI-한국어-285f48)](https://market-mover.vercel.app/ko)
-[![Tests](https://img.shields.io/badge/tests-17%20passed-237657)](#로컬-실행과-검증)
+- 배포 화면: https://market-mover.vercel.app/
+- 한국어 화면: https://market-mover.vercel.app/ko
+- 자동 테스트: 17개 통과
 
 ## 바로 체험하기
 
-- 영문 기본 화면: **https://market-mover.vercel.app/**
+- 기본 화면: **https://market-mover.vercel.app/**
 - 한국어 화면: **https://market-mover.vercel.app/ko**
 - 기본 주소로 접속했다면 우측 상단의 `한국어`를 누르면 됩니다.
 
@@ -16,7 +16,7 @@
 
 ## 심사위원을 위한 3분 체험 경로
 
-아래 동선은 배포된 Production 화면에서 직접 검증했습니다.
+아래 동선은 배포된 화면에서 직접 검증했습니다.
 
 ### 1. 시장 움직임에서 시작하기
 
@@ -138,7 +138,7 @@ Elon Musk · TSLA · 2024-10-25
 → 군집 대표 1,162개
 → 근거 준비 SNS 시그널 735개
 → 뉴스 7개 + 공시 1개 + 청문회 1개
-→ Main Atlas 총 744개
+→ 메인 아틀라스 총 744개
 ```
 
 | 구분 | 현재 범위 |
@@ -150,30 +150,30 @@ Elon Musk · TSLA · 2024-10-25
 | 과거 가격 | 이벤트 D-5~D+5 실제 일봉 종가·거래량 |
 | 최신 발언 | 독립 공개 아카이브의 Trump RSS, 하루 캐시 |
 | 최신 가격 | Twelve Data 키가 있으면 5개 미국 자산 일봉 갱신, 없으면 스냅샷 |
-| 뉴스 | Google News RSS 검색 → GDELT 보조 → 검토 스냅샷 fallback |
-| 공개 소셜 | Bluesky 공개 검색 표본 → 추적 코퍼스 fallback |
+| 뉴스 | Google News RSS 검색 → GDELT 보조 → 검토 스냅샷 대체 데이터 |
+| 공개 소셜 | Bluesky 공개 검색 표본 → 추적 코퍼스 대체 데이터 |
 
 Trump와 Musk는 전체 로컬 이력을 사용합니다. Sam Altman은 완전한 공개 원본 코퍼스가 없어 검토된 뉴스·공개 발언 사례만 제공합니다.
 
 ## 핵심 지표
 
-### Abnormal Return 1D
+### 1일 초과수익률
 
 ```text
 연결 자산의 1일 수익률 − 비교 기준 자산의 1일 수익률
 ```
 
-### Volume Multiple
+### 거래량 배수
 
 ```text
 이벤트 거래 세션 거래량 ÷ 직전 20거래일 평균 거래량
 ```
 
-### 3D Persistence
+### 3거래일 지속성
 
-3거래일 누적 초과수익률을 `Persisted / Faded / Reversed`로 구분합니다.
+3거래일 누적 초과수익률을 `지속 / 약화 / 반전`로 구분합니다.
 
-불투명한 단일 Impact Score는 사용하지 않습니다. 사용자는 1일 초과반응, 거래량, 3일 지속성, 최신순 중 정렬 기준을 직접 선택합니다.
+불투명한 단일 영향 점수는 사용하지 않습니다. 사용자는 1일 초과반응, 거래량, 3일 지속성, 최신순 중 정렬 기준을 직접 선택합니다.
 
 ## 시간 정렬 원칙
 
@@ -185,13 +185,13 @@ Trump와 Musk는 전체 로컬 이력을 사용합니다. Sam Altman은 완전�
 
 ## 데이터와 AI를 구분하는 방법
 
-기본 Production은 결정론적 근거 검토를 사용합니다.
+기본 배포 환경은 결정론적 근거 검토를 사용합니다.
 
 | 단계 | 처리 방식 |
 | --- | --- |
 | 가격·거래량·수익률 | 실제 데이터와 고정 수식 |
 | 토픽·자산 후보 | 검토 데이터 + 공개된 규칙 |
-| 뉴스·소셜 | 외부 공개 검색 또는 명시된 fallback |
+| 뉴스·소셜 | 외부 공개 검색 또는 명시된 대체 데이터 |
 | 신뢰도 | 출처·시간 정밀도·직접/프록시·결측 규칙 |
 | 리포트 | 기본은 결정론적, OpenAI는 서버에서 명시적으로 활성화할 때만 보조 |
 
@@ -206,15 +206,15 @@ OpenAI 보조 경로가 실패하거나 비활성화되어도 가격 계산과 �
   → 작은 배포용 JSON
   → Next.js App Router
   → 선택 사건별 뉴스·공개 소셜 조회
-  → Vercel Production + 일일 Cron
+  → Vercel 배포 환경 + 일일 Cron
 ```
 
 - Next.js App Router
 - TypeScript
 - Recharts
-- CSS responsive workspace
+- 반응형 CSS 작업공간
 - Vitest
-- Vercel Production
+- Vercel 배포 환경
 
 ## API
 
@@ -233,7 +233,7 @@ npm install
 npm run dev
 ```
 
-- 영문: http://localhost:3000
+- 기본 화면: http://localhost:3000
 - 한국어: http://localhost:3000/ko
 
 전체 검증:
@@ -266,9 +266,9 @@ ENABLE_LIVE_AI=false
 
 | 파일 | 역할 |
 | --- | --- |
-| `components/signal-atlas-dashboard.tsx` | Market Timeline, 사건 탐색, 멀티 자산 비교, 근거 검토 UI |
+| `components/signal-atlas-dashboard.tsx` | 시장 타임라인, 사건 탐색, 멀티 자산 비교, 근거 검토 UI |
 | `components/signal-universe.tsx` | 32,393개 전체 원문 검색 UI |
-| `lib/gdelt.ts` | 뉴스·공개 소셜 검색과 fallback |
+| `lib/gdelt.ts` | 뉴스·공개 소셜 검색과 대체 데이터 |
 | `lib/orchestration.ts` | 결정론적 근거 검토와 선택형 OpenAI 보조 |
 | `scripts/build-events.mjs` | 검토 사건과 실제 가격창 생성 |
 | `scripts/build-signal-catalog.mjs` | 전체 원문 카탈로그 생성 |
@@ -278,7 +278,7 @@ ENABLE_LIVE_AI=false
 ## 현재 한계
 
 - 발언과 시장 반응의 시간적 연관성은 인과관계 증명이 아닙니다.
-- 무료 데모에는 X 전체 아카이브·실시간 firehose가 없습니다.
+- 무료 데모에는 X 전체 아카이브·실시간 전체 스트림가 없습니다.
 - Musk·Altman의 최신 X 게시물은 실시간 추적하지 않습니다.
 - 공개 소셜 수치는 Bluesky 검색 표본 또는 로컬 추적 코퍼스 범위입니다.
 - 최신 RSS가 자동으로 완성된 사후 분석 사례가 되는 작업 큐는 아직 없습니다.
@@ -294,13 +294,13 @@ ENABLE_LIVE_AI=false
 - [x] 사건별 다중 자산 비교
 - [x] 뉴스·해시태그·공개 게시물 근거
 - [x] Direct / Policy / Proxy 구분
-- [x] exact/date-only 및 장전·장중·장후 구분
+- [x] 정확한 시각/날짜 단위 및 장전·장중·장후 구분
 - [x] 한국어·영문 UI
 - [x] 규칙 기반 계산과 선택형 AI 보조 분리
-- [x] 결측·stale·fallback 표시
+- [x] 결측·오래된 데이터·대체 데이터 표시
 - [x] 모바일 390px 가로 넘침 방지
 - [x] GitHub·Vercel·자동 테스트
 
-## Disclaimer
+## 면책 문구
 
 Market Signal Atlas는 연구·모니터링 도구이며 투자 조언, 매수·매도 추천, 가격 예측 서비스가 아닙니다. 공개 정보와 시장 반응의 시간적 연관성은 인과관계를 증명하지 않습니다.

@@ -100,18 +100,18 @@
     
     ## 7. 주요 기능
     
-    ### 1. Market Mover Overview
+    ### 1. Market Mover 개요
     
     첫 화면에서 전체 상황을 바로 보여준다.
     
     - 분석 기간
     - 이벤트 수
-    - 평균 Market Impact Score
+    - 평균 시장 영향 점수
     - 고위험 이벤트 수
-    - 평균 abnormal return
+    - 평균 초과수익률
     - 가장 영향력이 큰 인물과 토픽
     
-    ### 2. Tweet x Stock Timeline
+    ### 2. SNS 게시물 × 주가 타임라인
     
     가장 중요한 핵심 기능이다.
     
@@ -119,16 +119,16 @@
     - 마커를 클릭하면 게시물 본문, 인물, 플랫폼, topic, sentiment, engagement, 게시 후 수익률을 보여준다.
     - 사용자는 “이 주가 급등락 시점에 어떤 발언이 있었는가?”를 바로 확인할 수 있다.
     
-    ### 3. Impact Ranking
+    ### 3. 영향도 순위
     
     시장 반응이 컸던 게시물을 순위로 보여준다.
     
-    - Market Impact Score TOP 이벤트
+    - 시장 영향 점수 TOP 이벤트
     - 인물별 TOP 이벤트
     - 토픽별 TOP 이벤트
     - 종목별 TOP 이벤트
     
-    ### 4. Event Detail
+    ### 4. 이벤트 상세
     
     선택한 게시물을 깊게 볼 수 있는 상세 패널이다.
     
@@ -138,40 +138,40 @@
     - topic과 sentiment
     - likes, reposts, views
     - event window 수익률
-    - abnormal return
+    - 초과수익률
     - 거래량 변화
     - 변동성 변화
     
-    ### 5. Topic and Sentiment Analysis
+    ### 5. 토픽과 감성 분석
     
     게시물의 내용 특성에 따라 시장 반응이 달라지는지 보여준다.
     
     - Trump: tariff, China, trade, Fed, economy, company attack
     - Musk: Tesla, production, autonomous driving, AI, EV competition
-    - Positive / Neutral / Negative 또는 Calm / Heated / Market Shock
+    - 긍정 / 중립 / 부정 또는 차분함 / 과열 / 시장 충격
     
-    ## 8. Market Impact Score
+    ## 8. 시장 영향 점수
     
     주가를 직접 예측한다고 말하지 않고, 게시물이 단기 변동성 이벤트로 얼마나 주목할 만한지 점수화한다.
     
     예시:
     
     ```
-    Market Impact Score =
-      |Abnormal Return|
-      + Volume Change
-      + Volatility Change
-      + Engagement Percentile
-      + Person-Ticker Relevance
+    시장 영향 점수 =
+      |초과수익률|
+      + 거래량 변화
+      + 변동성 변화
+      + 참여도 백분위
+      + 인물-종목 관련성
     ```
     
     MVP에서는 데모용 계산식을 사용하고, 실제 분석 단계에서는 이벤트 스터디 결과와 연결한다.
     
     점수 구간:
     
-    - 0-49: Calm
-    - 50-79: Heated
-    - 80-100: Market Shock
+    - 0-49: 차분함
+    - 50-79: 과열
+    - 80-100: 시장 충격
     
     ## 9. 제품 화면 구성
     
@@ -186,7 +186,7 @@
     ### 필터
     
     - 인물: All / Trump / Musk
-    - 종목: All / TSLA / SPY / QQQ / GM / F / RIVN
+    - 종목: 전체 / TSLA / SPY / QQQ / GM / F / RIVN
     - 토픽
     - 위험도
     - 기간
@@ -198,7 +198,7 @@
     - 이벤트 전후 수익률 라인 차트
     - 종목별 반응 막대 차트
     - 토픽별 평균 반응 랭킹
-    - Impact Score 랭킹
+    - 영향 점수 랭킹
     
     ## 10. 기술 구현 방향
     
@@ -233,7 +233,7 @@
     | abnormal_return | 초과수익률 |
     | volume_change | 거래량 변화 |
     | volatility_change | 변동성 변화 |
-    | impact_score | 시장 영향도 점수 |
+    | impact_점수 | 시장 영향도 점수 |
     
     ## 11. 평가 기준 대응
     
@@ -266,7 +266,7 @@
     - yfinance 기반 자동 가격 업데이트
     - 실시간 SNS/뉴스 수집
     - 종목 자동 매핑
-    - FinBERT 또는 LLM 기반 topic/sentiment 분류
+    - FinBERT 또는 LLM 기반 토픽/감성 분류
     - 이벤트 스터디 통계 검정
     - 관심 종목 알림
     - Track2 최신 사건 케이스스터디 추가
@@ -279,7 +279,7 @@
     
     - TSLA 이벤트 전후 수익률 확인
     - RIVN, GM, F와 비교
-    - 직결 기업과 peer group 반응 차이 설명
+    - 직결 기업과 동종 비교군 반응 차이 설명
     
     ### 시나리오 2. Trump -> SPY/QQQ 정책형
     
@@ -334,32 +334,32 @@
         ## Core User Flow
         
         1. 사용자가 대시보드에 진입한다.
-        2. 상단 KPI에서 전체 이벤트 수, 평균 Impact Score, 고위험 이벤트 수, 평균 abnormal return을 확인한다.
+        2. 상단 KPI에서 전체 이벤트 수, 평균 영향 점수, 고위험 이벤트 수, 평균 초과수익률을 확인한다.
         3. 인물/종목 필터를 선택한다.
         4. 좌측 이벤트 타임라인에서 관심 게시물을 클릭한다.
         5. 중앙 상세 패널에서 게시물 본문, 주제, 감정 강도, engagement, 관련 종목을 확인한다.
-        6. 이벤트 전후 수익률 차트와 peer 반응 차트로 시장 반응을 비교한다.
-        7. 우측 Impact Ranking과 Topic 분석으로 어떤 유형의 발언이 더 큰 반응을 보였는지 확인한다.
+        6. 이벤트 전후 수익률 차트와 동종 자산 반응 차트로 시장 반응을 비교한다.
+        7. 우측 영향도 순위와 Topic 분석으로 어떤 유형의 발언이 더 큰 반응을 보였는지 확인한다.
         
-        ## Key Features
+        ## 핵심 기능
         
-        ### 1. Market Overview
+        ### 1. 시장 개요
         
         - 분석 기간 표시
         - 전체 이벤트 수
-        - 평균 Market Impact Score
+        - 평균 시장 영향 점수
         - 고위험 이벤트 수
-        - 평균 abnormal return
+        - 평균 초과수익률
         - 현재 필터 기준 최고 위험 이벤트 표시
         
-        ### 2. Event Feed
+        ### 2. 이벤트 목록
         
         - SNS 게시물을 시간순 이벤트로 표시
-        - 각 이벤트에 인물, 플랫폼, topic, ticker, impact score 표시
-        - `Calm`, `Heated`, `Market Shock` 상태 배지 제공
+        - 각 이벤트에 인물, 플랫폼, topic, ticker, impact 점수 표시
+        - `차분함`, `과열`, `시장 충격` 상태 배지 제공
         - 클릭 시 상세 패널과 차트가 즉시 갱신됨
         
-        ### 3. Event Detail
+        ### 3. 이벤트 상세
         
         - 게시물 본문
         - 작성자와 플랫폼
@@ -370,7 +370,7 @@
         - related tickers
         - 왜 이 이벤트가 flag 되었는지 설명
         
-        ### 4. Market Reaction Charts
+        ### 4. 시장 반응 차트
         
         - 이벤트 전후 수익률 라인 차트:
             - `1D`, `0D`, `+1D`, `+3D`
@@ -378,25 +378,25 @@
             - 예: TSLA vs RIVN vs GM vs F
         - 외부 BI 도구 없이 SVG/HTML/CSS로 구현
         
-        ### 5. Impact Ranking
+        ### 5. 영향도 순위
         
-        - Market Impact Score 기준 TOP 이벤트
+        - 시장 영향 점수 기준 TOP 이벤트
         - 클릭 시 해당 이벤트 상세로 이동
         - 발표 시 “가장 시장 반응이 컸던 게시물”을 빠르게 보여줄 수 있음
         
-        ### 6. Topic Analysis
+        ### 6. 토픽 분석
         
         - topic별 이벤트 수
         - topic별 평균 절대 반응
         - 고위험 이벤트 수
         - 예시 topic:
-            - Tariff / China
-            - Tesla / EV
-            - AI / Chips
-            - Policy / Presidency
-            - Company Attack
+            - 관세 / 중국
+            - 테슬라 / 전기차
+            - AI / 반도체
+            - 정책 / 대통령직
+            - 기업 공격
         
-        ## Data Model
+        ## 데이터 모델
         
         MVP에서는 샘플 JSON 데이터를 앱 내부에 내장하고, 이후 CSV 전처리 결과로 교체 가능하게 설계한다.
         
@@ -413,7 +413,7 @@
           likes: number,
           reposts: number,
           views: number | null,
-          tone: 'Calm' | 'Heated' | 'Market Shock',
+          tone: '차분함' | '과열' | '시장 충격',
           impactScore: number,
           priceWindow: {
             '-1D': number,
@@ -427,28 +427,28 @@
         }
         ```
         
-        ## Market Impact Score
+        ## 시장 영향 점수
         
         주가 예측 대신 “단기 시장 반응 가능성이 높은 이벤트인지”를 점수화한다.
         
         ```
-        Market Impact Score =
-          |Abnormal Return|
-          + Volume Change
-          + Volatility Change
-          + Engagement Percentile
-          + Person-Ticker Relevance
+        시장 영향 점수 =
+          |초과수익률|
+          + 거래량 변화
+          + 변동성 변화
+          + 참여도 백분위
+          + 인물-종목 관련성
         ```
         
         MVP에서는 데모용 점수를 사용한다. 실제 데이터 연결 후에는 이벤트 스터디 기반 지표로 교체한다.
         
         점수 구간:
         
-        - `0-49`: Calm
-        - `50-79`: Heated
-        - `80-100`: Market Shock
+        - `0-49`: 차분함
+        - `50-79`: 과열
+        - `80-100`: 시장 충격
         
-        ## Evaluation Fit
+        ## 심사 기준 적합성
         
         ### 기술적 구현과 안정성
         
@@ -461,7 +461,7 @@
         ### 제품 완성도와 사용자 경험
         
         - 앱 진입 즉시 “가장 위험한 이벤트”와 “시장 반응”을 확인 가능
-        - 좌측 이벤트 feed, 중앙 상세 분석, 우측 ranking/insight 구조
+        - 좌측 이벤트 목록, 중앙 상세 분석, 우측 순위/인사이트 구조
         - 발표자가 클릭 몇 번으로 핵심 시나리오를 시연 가능
         - 모바일에서는 패널이 세로로 자연스럽게 재배치됨
         
@@ -481,64 +481,64 @@
         - 실제 CSV 데이터 연결
         - yfinance 기반 가격 자동 업데이트
         - 실시간 SNS/뉴스 수집
-        - LLM 기반 topic/sentiment 분류
+        - LLM 기반 토픽/감성 분류
         - 종목 자동 매핑
         - 이벤트 스터디 통계 검정
         - 관심 종목 알림
         - Track2 최신 사건 케이스스터디 추가
         
-        ## Demo Scenarios
+        ## 시연 시나리오
         
-        ### Scenario 1. Musk -> TSLA 직결형
+        ### 시나리오 1. Musk -> TSLA 직결형
         
         - Musk 필터 선택
         - TSLA 선택
         - Tesla/EV 이벤트 클릭
-        - TSLA 수익률과 RIVN, GM, F peer 반응 비교
-        - 설명 포인트: CEO 발언은 직결 기업과 peer group에 다르게 반응할 수 있음
+        - TSLA 수익률과 RIVN, GM, F 동종 자산 반응 비교
+        - 설명 포인트: CEO 발언은 직결 기업과 동종 비교군에 다르게 반응할 수 있음
         
-        ### Scenario 2. Trump -> SPY/QQQ 정책형
+        ### 시나리오 2. Trump -> SPY/QQQ 정책형
         
         - Trump 필터 선택
         - QQQ 또는 SPY 선택
-        - Tariff / China 이벤트 클릭
-        - 이벤트 전후 QQQ 하락과 abnormal return 확인
+        - 관세 / 중국 이벤트 클릭
+        - 이벤트 전후 QQQ 하락과 초과수익률 확인
         - 설명 포인트: 정책형 발언은 개별 기업보다 지수 전체에 확산될 수 있음
         
-        ### Scenario 3. 고위험 이벤트 탐색
+        ### 시나리오 3. 고위험 이벤트 탐색
         
-        - All 필터 유지
-        - Impact Ranking TOP 이벤트 클릭
-        - Market Shock 배지와 Impact Score 확인
+        - 전체 필터 유지
+        - 영향도 순위 TOP 이벤트 클릭
+        - 시장 충격 배지와 영향 점수 확인
         - 설명 포인트: 사용자는 시장 반응이 컸던 발언을 빠르게 역추적할 수 있음
         
-        ## Implementation Plan
+        ## 구현 계획
         
         - 기존 Markdown 앱을 Market Mover 대시보드로 전면 교체
         - `src/main.jsx`:
-            - 샘플 event data
+            - 샘플 이벤트 데이터
             - 필터 상태
             - KPI 계산
             - 이벤트 선택 로직
             - SVG 라인 차트
             - 종목별 막대 차트
-            - ranking/criteria/demo panel 구현
+            - 순위/기준/데모 패널 구현
         - `src/styles.css`:
             - 밝은 금융 분석 도구 톤
             - 고대비 KPI 카드
             - 위험도 배지
             - 반응형 3열 대시보드 레이아웃
         - `index.html`:
-            - title과 description을 Market Mover에 맞게 수정
+            - 제목과 설명을 Market Mover에 맞게 수정
         
-        ## Test Plan
+        ## 테스트 계획
         
         - `npm run build` 성공 확인
         - 필터 테스트:
-            - All / Musk / Trump
+            - 전체 / Musk / Trump
             - TSLA / SPY / QQQ / GM / F / RIVN
         - 이벤트 선택 테스트:
-            - 이벤트 클릭 시 상세 카드, 차트, score가 갱신되는지 확인
+            - 이벤트 클릭 시 상세 카드, 차트, 점수가 갱신되는지 확인
         - 반응형 테스트:
             - 데스크톱 3열 레이아웃
             - 태블릿 2열 레이아웃
@@ -546,12 +546,12 @@
         - 발표 시나리오 테스트:
             - Musk -> TSLA
             - Trump -> QQQ
-            - Impact Ranking TOP 이벤트
+            - 영향도 순위 TOP 이벤트
         
-        ## Assumptions
+        ## 전제 조건
         
         - v1은 실제 분석 완료본이 아니라 **제품화 가능한 프론트 데모**를 우선한다.
-        - 샘플 수치는 발표용 mock data이며, 실제 CSV 전처리 결과로 교체 가능하게 만든다.
+        - 샘플 수치는 발표용 목업 데이터이며, 실제 CSV 전처리 결과로 교체 가능하게 만든다.
         - Trump는 정치적 평가 대상이 아니라, 선행연구와 공개 데이터가 풍부한 “시장 영향력이 큰 공적 인물 사례”로 중립적으로 사용한다.
         - 서비스 문구는 “인과관계 단정”이 아니라 “전후 시장 반응 탐색”으로 유지한다.
 - 기본적으로는 **“주가”**
