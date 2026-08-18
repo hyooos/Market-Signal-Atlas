@@ -425,6 +425,6 @@ Market Signal Atlas는 공개 정보와 시장 반응을 하나의 증거 경로
 
 ---
 
-## Disclaimer
+## Notice
 
 Market Signal Atlas는 연구와 모니터링을 위한 도구입니다. 투자 조언, 매수·매도 추천, 가격 예측 서비스가 아닙니다.
