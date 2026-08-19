@@ -10,7 +10,6 @@
 
 본 프로젝트는 OpenAI 해커톤에서 제작한 이벤트 기반 시장 시그널 탐색 서비스입니다. 공개 발언이나 뉴스가 나온 시점에 특정 자산의 가격, 거래량, 뉴스 보도량, 공개 소셜 관심도가 어떤 형태로 함께 움직였는지 한 화면에서 확인할 수 있도록 설계했습니다.
 
-Market Signal Atlas is an event-based market signal exploration dashboard built for the OpenAI hackathon. It helps users inspect how asset prices, trading volume, news coverage, and public social attention were observed around public statements, news, filings, and hearings.
 
 단순히 “누가 말해서 가격이 올랐다”는 결론을 제시하는 데서 끝나지 않고,
 
