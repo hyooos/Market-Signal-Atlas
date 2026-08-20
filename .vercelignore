@@ -1,0 +1,10 @@
+.next/
+node_modules/
+coverage/
+.git/
+.env*
+!config/env.example
+.vercel/
+data/raw/
+docs/project-notes/
+docs/presentation/
