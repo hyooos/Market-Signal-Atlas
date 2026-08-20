@@ -30,9 +30,7 @@
 
 ## Demo
 
-- 배포 화면: https://market-mover.vercel.app/
-- 한국어 화면: https://market-mover.vercel.app/ko
-- 최신 작업본(폰트·색상·차트 UI 개편 + 실시간 반응 파이프라인 포함): https://market-mover-sigma.vercel.app/ko
+- 배포 화면: https://market-mover-sigma.vercel.app/ko
 - 자세한 심사/시연 동선: [docs/DEMO_GUIDE.md](docs/DEMO_GUIDE.md)
 
 로그인, 결제, 개인 API 키 입력 없이 바로 사용할 수 있습니다.
